@@ -519,6 +519,8 @@
 
 
 
+
+
 /* ==========================================
    CLIENT LOGOS SECTION
 ========================================== */
@@ -2866,16 +2868,18 @@ document.getElementById("track").innerHTML =
 
 
 
-@media (max-width: 768px) {
-  .scroll-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
+@media (hover: hover) {
+  .scroll-container:hover .scroll-track {
+    animation-play-state: paused;
   }
+}
 
-  .scroll-track {
-    animation: none;
-  }
+.scroll-track {
+  animation: scroll-left 120s linear infinite;
+  width: max-content;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 
@@ -2897,10 +2901,6 @@ document.getElementById("track").innerHTML =
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
   }
-
-  .scroll-track {
-    animation: none;
-  }
 }
   .scroll-container {
     mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
@@ -2912,6 +2912,11 @@ document.getElementById("track").innerHTML =
   }
   .reviews-section { margin: 0; }
   .reviews-section h2 { margin-top: 0; }
+
+
+
+
+  
 </style>
 
 <!-- Reviews Section -->
@@ -3197,94 +3202,6 @@ document.getElementById("track").innerHTML =
 document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("scroll-track");
 
-  let resumeTimer;
-
-  function pauseAnimation() {
-    track.style.animationPlayState = "paused";
-  }
-
-  function resumeAnimation() {
-    track.style.animationPlayState = "running";
-  }
-
-  track.addEventListener("touchstart", () => {
-    pauseAnimation();
-    clearTimeout(resumeTimer);
-  });
-
-  track.addEventListener("touchmove", () => {
-    pauseAnimation();
-  });
-
-  track.addEventListener("touchend", () => {
-    clearTimeout(resumeTimer);
-
-    resumeTimer = setTimeout(() => {
-      resumeAnimation();
-    }, 2000); // resumes after 2 seconds
-  });
-});
-</script>
-
-
-
-
-
-  <script>
-if (window.innerWidth <= 768) {
-  const container = document.querySelector(".scroll-container");
-
-  let autoScroll = true;
-
-  container.addEventListener("touchstart", () => {
-    autoScroll = false;
-  });
-
-  container.addEventListener("touchend", () => {
-    setTimeout(() => {
-      autoScroll = true;
-    }, 3000);
-  });
-
-  setInterval(() => {
-    if (!autoScroll) return;
-
-    container.scrollLeft += 6;
-
-    if (
-      container.scrollLeft >=
-      (container.scrollWidth - container.clientWidth) / 2
-    ) {
-      container.scrollLeft = 0;
-    }
-  }, 10);
-}
-</script>
-
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const track = document.getElementById("scroll-track");
-  const container = document.querySelector(".scroll-container");
-
-  container.addEventListener("touchstart", () => {
-    track.style.animationPlayState = "paused";
-  }, { passive: true });
-
-  container.addEventListener("touchend", () => {
-    track.style.animationPlayState = "running";
-  });
-
-  container.addEventListener("touchcancel", () => {
-    track.style.animationPlayState = "running";
-  });
-});
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const track = document.getElementById("scroll-track");
-
   function pauseScroll() {
     track.style.animationPlayState = "paused";
   }
@@ -3293,19 +3210,14 @@ document.addEventListener("DOMContentLoaded", () => {
     track.style.animationPlayState = "running";
   }
 
-  // Apply to all testimonial cards
-  document.querySelectorAll(".card-fixed").forEach(card => {
+  // Mobile hold
+  track.addEventListener("touchstart", pauseScroll, { passive: true });
+  track.addEventListener("touchend", resumeScroll);
+  track.addEventListener("touchcancel", resumeScroll);
 
-    // Mobile
-    card.addEventListener("touchstart", pauseScroll, { passive: true });
-    card.addEventListener("touchend", resumeScroll);
-    card.addEventListener("touchcancel", resumeScroll);
-
-    // Desktop (optional backup)
-    card.addEventListener("mousedown", pauseScroll);
-    card.addEventListener("mouseup", resumeScroll);
-    card.addEventListener("mouseleave", resumeScroll);
-  });
+  // Desktop hover backup
+  track.addEventListener("mousedown", pauseScroll);
+  document.addEventListener("mouseup", resumeScroll);
 });
 </script>
 
