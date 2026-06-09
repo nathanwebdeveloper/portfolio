@@ -1994,14 +1994,13 @@ document.getElementById("track").innerHTML =
     }
 
     .compare-row {
-      position: relative;
-      height: 42px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 14px;
-    }
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
 
     .compare-row.light {
       width: 100%;
@@ -2015,22 +2014,20 @@ document.getElementById("track").innerHTML =
       background: var(--purple);
       color: #fff;
       box-shadow: 0 12px 24px rgba(90, 23, 255, 0.22);
-      justify-content: space-between;
     }
 
     .compare-label {
-      position: absolute;
-      left: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-    }
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
 
     .compare-value {
-      font-size: 13px;
-      font-weight: 600;
-    }
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
 
     .mini-circle {
       width: 18px;
@@ -2559,6 +2556,11 @@ document.getElementById("track").innerHTML =
       .mockups {
         min-height: 250px;
       }
+
+
+      
+
+      
     }
 
 
@@ -2603,6 +2605,23 @@ document.getElementById("track").innerHTML =
   }
 }
 
+@media (max-width: 480px) {
+  .compare-row {
+    padding: 0 10px;
+  }
+
+  .compare-label,
+  .compare-value {
+    font-size: 12px;
+    justify-content: space-between;
+  }
+
+  .compare-row.purple {
+    width: 70%;
+    justify-content: space-between;
+  }
+}
+
 
 
 
@@ -2638,7 +2657,7 @@ document.getElementById("track").innerHTML =
                   <span class="mini-circle">?</span>
                   <span>Agency</span>
                 </div>
-                <div class="compare-value">Up to $3 000</div>
+                <div class="compare-value">Up to $5 000</div>
               </div>
 
               <div class="compare-row purple">
@@ -2650,7 +2669,7 @@ document.getElementById("track").innerHTML =
                   </span>
                   <span>Nathaniel</span>
                 </div>
-                <div class="compare-value">$500</div>
+                <div class="compare-value">     $500</div>
               </div>
             </div>
           </div>
